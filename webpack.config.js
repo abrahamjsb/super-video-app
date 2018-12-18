@@ -1,27 +1,7 @@
 const path = require('path')
-const webpack = require('webpack')
 
 module.exports = {
-  context: __dirname,
   entry: './js/ClientApp.js',
-  devtool: 'eval',
-  output: {
-    path: path.join(__dirname, '/public'),
-    filename: 'bundle.js',
-    publicPath: '/public/'
-  },
-  devServer: {
-    publicPath: '/public/',
-    historyApiFallback: true
-  },
-  resolve: {
-    extensions: ['.js', '.json']
-  },
-  stats: {
-    colors: true,
-    reasons: true,
-    chunks: true
-  },
   module: {
     rules: [
       {
@@ -31,13 +11,9 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.json$/,
-        loader: 'json-loader'
-      },
-      {
-        include: path.resolve(__dirname, 'js'),
-        test: /\.js$/,
-        loader: 'babel-loader'
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: 'babel-loader'
       },
       {
         test: /\.css$/,
@@ -52,5 +28,16 @@ module.exports = {
         ]
       }
     ]
+  },
+  resolve: {
+    extensions: ['*', '.js', '.jsx']
+  },
+  output: {
+    path: path.join(__dirname, '/dist'),
+    publicPath: '/',
+    filename: 'bundle.js'
+  },
+  devServer: {
+    contentBase: './dist'
   }
 }

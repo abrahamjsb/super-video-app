@@ -4,10 +4,9 @@ import { Provider } from 'react-redux'
 import store from './store'
 import preload from '../public/data.json'
 import AsyncRoute from './AsyncRoute'
-
-if (global) {
-  global.System = { import () {} }
-}
+import Landing from './Landing'
+import Search from './Search'
+import Details from './Details'
 
 const App = () => {
   return (
@@ -16,19 +15,33 @@ const App = () => {
         <Match
           exactly
           pattern='/'
-          loadingPromise={(props) => <AsyncRoute props={props} component={System.import('./Landing')} />}
+          loadingPromise={props => (
+            <AsyncRoute props={props} component={Landing} />
+          )}
         />
         <Match
           pattern='/search'
-          component={(props) => {
-            return <AsyncRoute props={Object.assign({shows: preload.shows}, props)} loadingPromise={System.import('./Search')} />
+          component={props => {
+            return (
+              <AsyncRoute
+                props={Object.assign({ shows: preload.shows }, props)}
+                loadingPromise={Search}
+              />
+            )
           }}
         />
         <Match
           pattern='/details/:id'
-          component={(props) => {
-            const show = preload.shows.filter((show) => props.params.id === show.imdbID)
-            return <AsyncRoute props={Object.assign({show: show[0]}, props)} loadingPromise={System.import('./Details')} />
+          component={props => {
+            const show = preload.shows.filter(
+              show => props.params.id === show.imdbID
+            )
+            return (
+              <AsyncRoute
+                props={Object.assign({ show: show[0] }, props)}
+                loadingPromise={Details}
+              />
+            )
           }}
         />
       </div>

@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ShowCard from './ShowCard'
 import Header from './Header'
-import {filterShowByText} from './Helpers/showHelpers'
+import { filterShowByText } from './Helpers/showHelpers'
 const { shape, arrayOf, string } = React.PropTypes
 
 class Search extends Component {
@@ -11,12 +11,11 @@ class Search extends Component {
       <div className='search'>
         <Header showSearch />
         <div>
-          {this.props.shows.filter((show) => filterShowByText(show, this.props.searchTerm))
-          .map((show) => {
-            return (
-              <ShowCard key={show.imdbID} {...show} />
-            )
-          })}
+          {this.props.shows
+            .filter(show => filterShowByText(show, this.props.searchTerm))
+            .map(show => {
+              return <ShowCard key={show.imdbID} {...show} />
+            })}
         </div>
       </div>
     )
@@ -25,13 +24,15 @@ class Search extends Component {
 
 Search.propTypes = {
   searchTerm: string,
-  shows: arrayOf(shape({
-    title: string,
-    description: string
-  }))
+  shows: arrayOf(
+    shape({
+      title: string,
+      description: string
+    })
+  )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     searchTerm: state.searchTerm
   }

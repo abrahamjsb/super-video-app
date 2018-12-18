@@ -8,12 +8,12 @@
   "scripts": {
     "build": "webpack",
     "cover": "jest --coverage",
-    "dev": "webpack-dev-server",
+    "dev": "webpack-dev-server --config ./webpack.config.js --mode development",
     "lint": "eslint ./js/**/*.js",
     "start": "NODE_ENV=server node server.js",
     "test": "jest",
     "update-test": "jest -u",
-    "watch" : "webpack --watch"
+    "watch": "webpack --watch"
   },
   "dependencies": {
     "axios": "^0.15.3",
@@ -30,23 +30,22 @@
     "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
-    "babel-core": "6.16.0",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
     "babel-jest": "16.0.0",
-    "babel-loader": "6.2.7",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
+    "babel-loader": "^8.0.4",
     "babel-polyfill": "^6.16.0",
-    "babel-preset-es2015": "6.18.0",
     "babel-preset-es2017": "6.16.0",
-    "babel-preset-react": "6.16.0",
     "babel-register": "6.16.0",
     "css-loader": "0.25.0",
     "enzyme": "2.0.0",
     "enzyme-to-json": "^1.3.0",
-    "eslint": "3.6.1",
+    "eslint": "^5.10.0",
     "eslint-config-standard": "6.1.0",
     "eslint-config-standard-jsx": "3.1.0",
     "eslint-config-standard-react": "4.1.0",
-    "eslint-loader": "1.3.0",
+    "eslint-loader": "^2.1.1",
     "eslint-plugin-promise": "2.0.1",
     "eslint-plugin-react": "6.3.0",
     "eslint-plugin-standard": "2.0.0",
@@ -56,7 +55,8 @@
     "react-addons-test-utils": "15.3.2",
     "react-test-renderer": "15.3.2",
     "style-loader": "0.13.1",
-    "webpack": "2.1.0-beta.25",
-    "webpack-dev-server": "1.16.2"
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
   }
 }
